@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //Mendapatkan UserID dari pengguna yang Terautentikasi
                 val getUserID = auth!!.currentUser!!.uid
 //Mendapatkan Instance dari Database
-                val database = FirebaseDatabase.getInstance()
+                val database = FirebaseDatabase.getInstance("https://crudfirebasekotlin-7bff0-default-rtdb.asia-southeast1.firebasedatabase.app")
 //Menyimpan Data yang diinputkan User kedalam Variable
                 val getNIM: String = nim.getText().toString()
                 val getNama: String = nama.getText().toString()
@@ -60,32 +60,33 @@ dari masing-masing Akun
                     getReference.child("Admin").child(getUserID).child("Mahasiswa").push()
                         .setValue(data_mahasiswa(getNIM, getNama, getJurusan))
                         .addOnCompleteListener(this) { //Peristiwa ini terjadi saat user berhasil menyimpan datanya kedalam Database
-                                    nim.setText("")
+                            nim.setText("")
                             nama.setText("")
                             jurusan.setText("")
 
-                            Toast.makeText(this@MainActivity, "Data Tersimpan",
-                                Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "Data Tersimpan", Toast.LENGTH_SHORT).show()
                         }
                 }
             }
+            R.id.logout -> {
+                // Statement program untuk logout/keluar
+                AuthUI.getInstance()
+                    .signOut(this)
+                    .addOnCompleteListener(object : OnCompleteListener<Void> {
+                        override fun onComplete(p0: Task<Void>) {
+                            Toast.makeText(this@MainActivity, "Logout Berhasil", Toast.LENGTH_SHORT)
+                                .show()
+                            intent = Intent(
+                                applicationContext,
+                                LoginActivity::class.java
+                            )
+                            startActivity(intent)
+
+                            finish()
+
+                        }
+                    })
+            }
         }
-    }
-}
-
-class data_mahasiswa {
-    //Deklarasi Variable
-    var nim: String? = null
-    var nama: String? = null
-    var jurusan: String? = null
-    var key: String? = null
-    //Membuat Konstuktor kosong untuk membaca data snapshot
-    constructor() {}
-    //Konstruktor dengan beberapa parameter, untuk mendapatkan Input Data dari User
-    constructor(nim: String?, nama: String?, jurusan: String?) {
-        this.nim = nim
-        this.nama = nama
-
-        this.jurusan = jurusan
     }
 }

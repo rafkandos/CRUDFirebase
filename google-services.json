@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "777043960852-i8bcmh5ph2jgg0g4qkaf3719ukp6411q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.raffli.crudfirebase",
+            "certificate_hash": "1f2c1f3d049a6a1ed6bc645d7b3e744532ab9437"
+          }
+        },
+        {
           "client_id": "777043960852-0a8garur3t2kmv11t7f7kvocb9pq6oh0.apps.googleusercontent.com",
           "client_type": 3
         }
