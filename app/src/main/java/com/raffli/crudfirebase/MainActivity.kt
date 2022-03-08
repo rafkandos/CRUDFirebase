@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-    //Inisialisasi ID (Button)
+        //Inisialisasi ID (Button)
         logout.setOnClickListener(this)
         save.setOnClickListener(this)
         showdata.setOnClickListener(this)
-    //Mendapatkan Instance Firebase Autentifikasi
+        //Mendapatkan Instance Firebase Autentifikasi
         auth = FirebaseAuth.getInstance()
     }
     // Mengecek apakah ada data kosong, digunakan pada Tutorial Selanjutnya
@@ -36,27 +36,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.getId()) {
             R.id.save -> {
-// Statement program untuk simpan data
-//Mendapatkan UserID dari pengguna yang Terautentikasi
+                // Statement program untuk simpan data
+                //Mendapatkan UserID dari pengguna yang Terautentikasi
                 val getUserID = auth!!.currentUser!!.uid
-//Mendapatkan Instance dari Database
+                //Mendapatkan Instance dari Database
                 val database = FirebaseDatabase.getInstance("https://crudfirebasekotlin-7bff0-default-rtdb.asia-southeast1.firebasedatabase.app")
-//Menyimpan Data yang diinputkan User kedalam Variable
+                //Menyimpan Data yang diinputkan User kedalam Variable
                 val getNIM: String = nim.getText().toString()
                 val getNama: String = nama.getText().toString()
                 val getJurusan: String = jurusan.getText().toString()
-// Mendapatkan Referensi dari Database
+                // Mendapatkan Referensi dari Database
                 val getReference: DatabaseReference
                 getReference = database.reference
-// Mengecek apakah ada data yang kosong
+                // Mengecek apakah ada data yang kosong
                 if (isEmpty(getNIM) || isEmpty(getNama) || isEmpty(getJurusan)) {
-//Jika Ada, maka akan menampilkan pesan singkan seperti berikut ini.
+                //Jika Ada, maka akan menampilkan pesan singkan seperti berikut ini.
                     Toast.makeText(this@MainActivity, "Data tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show()
                 } else {
-/* Jika Tidak, maka data dapat diproses dan meyimpannya pada
-Database Menyimpan data referensi pada Database berdasarkan User ID
-dari masing-masing Akun
-*/
+                    /* Jika Tidak, maka data dapat diproses dan meyimpannya pada
+                    Database Menyimpan data referensi pada Database berdasarkan User ID
+                    dari masing-masing Akun
+                    */
                     getReference.child("Admin").child(getUserID).child("Mahasiswa").push()
                         .setValue(data_mahasiswa(getNIM, getNama, getJurusan))
                         .addOnCompleteListener(this) { //Peristiwa ini terjadi saat user berhasil menyimpan datanya kedalam Database
@@ -86,6 +86,9 @@ dari masing-masing Akun
 
                         }
                     })
+            }
+            R.id.showdata -> {
+                startActivity(Intent(this@MainActivity, MyListData::class.java))
             }
         }
     }
