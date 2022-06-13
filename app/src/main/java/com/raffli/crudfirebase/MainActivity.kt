@@ -45,6 +45,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val getNIM: String = nim.getText().toString()
                 val getNama: String = nama.getText().toString()
                 val getJurusan: String = jurusan.getText().toString()
+                val getAlamat: String = alamat.getText().toString()
+                val getJkel: String = jkel.getSelectedItem().toString()
                 // Mendapatkan Referensi dari Database
                 val getReference: DatabaseReference
                 getReference = database.reference
@@ -58,11 +60,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     dari masing-masing Akun
                     */
                     getReference.child("Admin").child(getUserID).child("Mahasiswa").push()
-                        .setValue(data_mahasiswa(getNIM, getNama, getJurusan))
+                        .setValue(data_mahasiswa(getNIM, getNama, getJurusan, getAlamat, getJkel))
                         .addOnCompleteListener(this) { //Peristiwa ini terjadi saat user berhasil menyimpan datanya kedalam Database
                             nim.setText("")
                             nama.setText("")
                             jurusan.setText("")
+                            alamat.setText("")
 
                             Toast.makeText(this@MainActivity, "Data Tersimpan", Toast.LENGTH_SHORT).show()
                         }

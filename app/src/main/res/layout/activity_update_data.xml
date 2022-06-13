@@ -27,6 +27,21 @@
         android:ems="10"
         android:hint="Jurusan Baru"
         android:inputType="textPersonName" />
+
+    <Spinner
+        android:id="@+id/new_jkel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/jkel"
+        android:hint="Jenis Kelamin Baru" />
+
+    <EditText
+        android:id="@+id/new_alamat"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:ems="10"
+        android:hint="Alamat Baru"
+        android:inputType="textPersonName" />
     <Button
         android:id="@+id/update"
         android:layout_width="match_parent"

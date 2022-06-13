@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CRUDFirebase</string>
+    <string-array name="jkel">
+        <item>Laki-laki</item>
+        <item>Perempuan</item>
+    </string-array>
 </resources>

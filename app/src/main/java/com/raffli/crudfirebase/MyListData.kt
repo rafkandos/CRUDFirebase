@@ -1,5 +1,6 @@
 package com.raffli.crudfirebase
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -99,10 +100,11 @@ class MyListData : AppCompatActivity(), RecyclerViewAdapter.dataListener {
                 .child(getKey!!)
                 .removeValue()
                 .addOnSuccessListener {
-                    Toast.makeText(this@MyListData, "Data Berhasil Dihapus",
-                        Toast.LENGTH_SHORT).show();
-                    finish()
+                    startActivity(Intent(this@MyListData, MyListData::class.java))
                 }
+        }
+        else {
+            Toast.makeText(applicationContext, "Reference kosong", Toast.LENGTH_SHORT).show()
         }
     }
 }
